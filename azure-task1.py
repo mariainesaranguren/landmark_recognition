@@ -16,6 +16,7 @@ Decription:	To establish initial results for this final project, a test set of 5
 '''
 # Imports
 import requests
+import json
 
 # API Keys
 KEY_1 = "0f03da15d4534a5a84f8c8924d66dc51"
@@ -65,6 +66,8 @@ for id in trial_ids_images_dict.keys():
 		response.raise_for_status()
 		analysis = response.json()
 		print analysis
+		image_caption = analysis["description"]["tags"]
+		print(image_caption)
 		break
 		
 
