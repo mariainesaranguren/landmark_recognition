@@ -53,6 +53,8 @@ def read_csv_to_dict():
 	return landmarks
 
 def download_landmark_imgs(landmarks):
+
+	# should end on 9770 
 	NEW_WIDTH = 96
 	NEW_HEIGHT = 96
 
@@ -67,49 +69,61 @@ def download_landmark_imgs(landmarks):
 	max_images_downloaded = 100
 
 	# Dictionaries for 
+	skip = True
 	for landmark_id in landmarks.keys():
-		images_downloaded = 0
-		if current_downloaded_num <= landmark_download_num:
-			print "Processing: ", landmark_id
 
-			# Make a directory for this landmark id
-			if not os.path.exists(landmark_id):
-				os.makedirs("data/"+landmark_id)
-
-			# Download the images into the appropriate dir for this landmark
-			list_of_imgs = landmarks[landmark_id]
-			for landmark_img_link_and_id in list_of_imgs:
-				if images_downloaded >= max_images_downloaded:
-					break
-
-				# Get the link and id
-				img_link = landmark_img_link_and_id[0][1:-1]
-				img_id = landmark_img_link_and_id[1][1:-1]
-
-				# Open the url
-				url_object = urlopen(img_link)
-
-				# Download the img
-				try: 
-					im = Image.open(url_object)
-					images_downloaded += 1
-
-					# Resize the image
-					cover = resizeimage.resize_cover(im, [NEW_WIDTH, NEW_HEIGHT])
-
-					# Convert to rgb
-					rgb = cover.convert('RGB')
-
-					# Save the image to appropriate directory
-					rgb.save("data/"+landmark_id+"/"+img_id+".jpg", 'JPEG')
-
-				except IOError as error:
-					print error
-			current_downloaded_num += 1
-
+		if landmark_id == "3878":
+			print "Hit 3878"
+			skip = False
+		if skip:
+			print "Skipping landmark_id: ", landmark_id
+			continue
 		else:
-			print "Done downloading ", landmark_download_num, " landmarks."
-			break
+			images_downloaded = 0
+			if current_downloaded_num <= landmark_download_num:
+				print "Processing: ", landmark_id
+
+				# Make a directory for this landmark id
+				if not os.path.exists(landmark_id):
+					os.makedirs("data/"+landmark_id)
+
+				# Download the images into the appropriate dir for this landmark
+				list_of_imgs = landmarks[landmark_id]
+				for landmark_img_link_and_id in list_of_imgs:
+					if images_downloaded >= max_images_downloaded:
+						break
+
+					# Get the link and id
+					img_link = landmark_img_link_and_id[0][1:-1]
+					img_id = landmark_img_link_and_id[1][1:-1]
+
+					# Open the url
+					url_object = urlopen(img_link)
+
+					# Download the img
+					try: 
+						im = Image.open(url_object)
+						images_downloaded += 1
+
+						# Resize the image
+						try: 
+							cover = resizeimage.resize_cover(im, [NEW_WIDTH, NEW_HEIGHT])
+
+							# Convert to rgb
+							rgb = cover.convert('RGB')
+
+							# Save the image to appropriate directory
+							rgb.save("data/"+landmark_id+"/"+img_id+".jpg", 'JPEG')
+						except:
+							print "ERROR"
+
+					except IOError as error:
+						print error
+				current_downloaded_num += 1
+
+			else:
+				print "Done downloading ", landmark_download_num, " landmarks."
+				break
 
 def generate_lists():
 

@@ -60,6 +60,6 @@ def run_training():
 	coord.join(threads)
 	sess.close()
 
-landmarks_dict = create_trainining_set.read_csv_to_dict()
-create_trainining_set.download_landmark_imgs(landmarks_dict)
+#landmarks_dict = create_trainining_set.read_csv_to_dict()
+#create_trainining_set.download_landmark_imgs(landmarks_dict)
 run_training()
