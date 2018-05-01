@@ -430,7 +430,6 @@ def get_or_create_bottleneck(sess, image_lists, label_name, index, image_dir,
   bottleneck_path = get_bottleneck_path(image_lists, label_name, index,
                                         bottleneck_dir, category, architecture)
   if not os.path.exists(bottleneck_path):
-    print ("Creating bottleneck")
     create_bottleneck_file(bottleneck_path, image_lists, label_name, index,
                            image_dir, category, sess, jpeg_data_tensor,
                            decoded_image_tensor, resized_input_tensor,
