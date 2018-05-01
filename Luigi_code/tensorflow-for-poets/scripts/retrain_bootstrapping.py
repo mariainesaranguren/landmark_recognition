@@ -215,7 +215,7 @@ def create_image_lists(image_dir, testing_percentage, validation_percentage, boo
 
   # Pickle landmark_testing_images dict
   print ("========== Pickling landmark_testing_images dict. Bootstrap #"+str(bootstrap_num)+" ==========")
-  testing_file_name = "landmark_testing_images_"+str(bootstrap_num)+".pkl"
+  testing_file_name = "tf_files/testing_images_bootstrap_"+str(bootstrap_num)+".pkl"
   fileObject = open(testing_file_name,'wb')
   pickle.dump(landmark_testing_images,fileObject)
   fileObject.close()
@@ -992,8 +992,6 @@ def main(_):
   # Prepare necessary directories  that can be used during training
   prepare_file_system()
 
-  print("FLAGS.bootstrap_k", FLAGS.bootstrap_k)
-
   for bootstrap_num in range(FLAGS.bootstrap_k):
       print ("================================= Bootstrap #", bootstrap_num, "/", FLAGS.bootstrap_k, "================================= ");
       # Gather information about the model architecture we'll be using.
@@ -1171,7 +1169,6 @@ def main(_):
 
 
 if __name__ == '__main__':
-  # print (sys.argv)
   parser = argparse.ArgumentParser()
   parser.add_argument(
       '--bootstrap_k',
