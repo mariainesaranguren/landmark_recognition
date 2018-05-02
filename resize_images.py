@@ -9,10 +9,20 @@ import pickle
 import sys
 import os
 
+
 image_dir = "/Users/mariainesaranguren/Desktop/ML_luigi/Images"
-image_dir_maggie = "/Volumes/LaCie/School/Machine Learning/FinalProject/Luigi_code/Images"
+
+if len(sys.argv) < 2:
+	print ("Usage: python resize_images.py path/to/images")
+	exit()
+
+# image_dir = "/Users/mariainesaranguren/Desktop/ML_luigi/Images"
+image_dir = sys.argv[1]
+
 NEW_WIDTH = 256
 NEW_HEIGHT = 256
+
+print ("Opening up images on ", image_dir)
 
 # Traverse root directory, and list directories as dirs and files as files
 for root, dirs, files in os.walk(image_dir_maggie):
@@ -22,7 +32,7 @@ for root, dirs, files in os.walk(image_dir_maggie):
 
     	# Continue program
 	path = root.split(os.sep)
-	print("Resizing directory", os.path.basename(root))
+	print("Currently on directory", os.path.basename(root))
 	for image_file in files:
 	# Go through each image in the list and resize it
 		print ("Resizing image", image_dir_maggie+"/"+os.path.basename(root)+"/"+image_file)
