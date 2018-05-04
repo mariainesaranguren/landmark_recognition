@@ -106,7 +106,7 @@ for rank in range(6):        # [0, 1, 2, 3, 4, 5]
     if rank == 0:
         print ("Average count of landmarks not identified:\t\t\t", count/float(len(bootstrap_rank_counts)))
     else:
-        print ("Average count of correct identifications with prediction #", rank, ":", count/float(len(bootstrap_rank_counts)))
+        print ("Average count of correct identifications up to prediction #", rank, ":", count/float(len(bootstrap_rank_counts)))
 for n in range(len(bootstrap_identified_P)):
     if n == 0:
         print ("Average P(Not identified): \t\t", get_average(bootstrap_identified_P[n]))
