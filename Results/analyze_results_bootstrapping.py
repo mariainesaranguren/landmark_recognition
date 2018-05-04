@@ -21,7 +21,7 @@ bootstrap_conf_50 = []
 bootstrap_conf_75 = []
 bootstrap_conf_max = []
 bootstrap_rank_counts = []
-bootstrap_identified_P = [[],[],[],[],[]]
+bootstrap_identified_P = [[],[],[],[],[],[]]
 
 # ****** PART ONE: Collects results from csv and records results ******
 for input in input_files:
@@ -85,7 +85,7 @@ for input in input_files:
             count_rank[rank] = 1
     bootstrap_rank_counts.append(count_rank)
     bootstrap_identified_P[0].append(count_rank[0]/len(all_rank) if 0 in count_rank.keys() else 0)
-    for n in range(1, 5):                   # Iterating on lists in bootstrap_identified_P where index i matches to i+1 top votes
+    for n in range(1, 6):                   # Iterating on lists in bootstrap_identified_P where index i matches to i+1 top votes
         identified = 0
         for i in range(1,n+1):              # Cumulative sum (ex: top 3 means rank==1 + rank==2 + rank==3)
             identified += count_rank[i] if i in count_rank.keys() else 0
@@ -108,7 +108,10 @@ for rank in range(6):        # [0, 1, 2, 3, 4, 5]
     else:
         print ("Average count of correct identifications with prediction #", rank, ":", count/float(len(bootstrap_rank_counts)))
 for n in range(len(bootstrap_identified_P)):
-    print ("Average P(Identified in top", n+1, "guesses): ", get_average(bootstrap_identified_P[n]))
+    if n == 0:
+        print ("Average P(Not identified): \t\t", get_average(bootstrap_identified_P[n]))
+    else:
+        print ("Average P(Identified in top", n, "guesses): ", get_average(bootstrap_identified_P[n]))
 
 
 print ("\n*** Confidence: ***")
