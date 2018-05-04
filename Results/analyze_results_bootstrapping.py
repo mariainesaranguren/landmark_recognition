@@ -23,7 +23,7 @@ bootstrap_conf_max = []
 bootstrap_rank_counts = []
 bootstrap_identified_P = [[],[],[],[],[]]
 
-
+# ****** PART ONE: Collects results from csv and records results ******
 for input in input_files:
     # Parses csv files
     f = open(input, "r")
@@ -92,6 +92,7 @@ for input in input_files:
         bootstrap_identified_P[n].append(identified/len(all_rank))
 
 
+# ****** PART TWO: Averages results across bootstraps  ******
 print ("------- Overall results across bootstraps: ------- ")
 print ("*** General: ***")
 print ("Average number of predictions made: ", get_average(bootstrap_predict_made))
