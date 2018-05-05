@@ -1,4 +1,4 @@
 Landmark Recognition
 Maria Ines Aranguren, Luigi Grazioso, & Maggie Thomann
 
-This project builds a model with a dataset of photos of landmarks and tests its performance in identifying landmarks in new images.
+This project uses deep learning to recognize landmarks in photos. Transfer learning is done by using a MobileNet model and retraining the last layer with a dataset of labeled landmark images.
